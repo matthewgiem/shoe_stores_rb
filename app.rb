@@ -53,3 +53,18 @@ delete('/store/:id') do
   store.delete()
   redirect to("/store")
 end
+
+get('/brands/:id') do
+  id = params.fetch('id').to_i()
+  @brand = Brand.find(id)
+  @stores = Store.all()
+  erb(:brand_update)
+end
+
+post('/brands/:id') do
+  id = params.fetch('id').to_i()
+  brand = Brand.find(id)
+  store_ids = params['store_ids']
+  brand_stores = brand.update({:store_ids => store_ids})
+  redirect to("brands/#{id}")
+end

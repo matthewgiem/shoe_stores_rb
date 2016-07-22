@@ -1,0 +1,34 @@
+<h1><%= @brand.name() %></h1>
+<h2>where is this shoe sold?</h2>
+
+<% if @brand.stores.any?() %>
+  <ul>
+    <% @brand.stores.each() do |store| %>
+      <li><%= store.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no stores added yet</p>
+<% end %>
+
+<h2>update where it's sold</h2>
+
+<form action="/brands/<%= @brand.id() %>" method="post">
+  <div class="checkbox">
+    <% if @stores.any?() %>
+      <% @stores.each() do |store| %>
+
+        <label name="store_ids">
+          <input type="checkbox" name="store_ids[]" value="<%= store.id() %>">
+          <%= store.name() %>
+        </label>
+      <% end %>
+
+    <% else %>
+
+      <p>There are no stores yet!</p>
+    <% end %>
+  </div>
+  <button type="submit" name="button">Sold here</button>
+</form>
+<a href="/brand">back</a>
