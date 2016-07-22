@@ -9,7 +9,7 @@
 <% if @stores.any?() %>
   <ul>
     <% @stores.each() do |store| %>
-      <li><a href="/store/<%= store.id() %>"><%= store.name() %></a></li>
+      <li><a href="/store/<%= store.id() %>"><%= store.name() %></a><form action="/store/<%= store.id() %>" method="post"><input type="hidden" name="_method" value="delete"><button type="submit">delete</button></form></li>
       <% end %>
   </ul>
 <% else %>
