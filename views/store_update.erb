@@ -1,0 +1,8 @@
+<h1><%= @store.name() %></h1>
+<form action="/store/<%= @store.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label>new name:</label>
+  <input type="text" name="name" value="<%= @store.name() %>">
+  <button type="submit">change</button>
+
+</form>

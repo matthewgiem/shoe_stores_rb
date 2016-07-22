@@ -32,3 +32,17 @@ post('/store/new') do
   Store.create({:name => name})
   redirect to('/store')
 end
+
+get('/store/:id') do
+  id = params.fetch('id').to_i()
+  @store = Store.find(id)
+  erb(:store_update)
+end
+
+patch('/store/:id') do
+  id = params.fetch('id').to_i()
+  name = params.fetch('name')
+  store = Store.find(id)
+  store.update({:name => name})
+  redirect to("/store/#{id}")
+end
