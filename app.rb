@@ -10,3 +10,11 @@ require('pry')
 get('/') do
   erb(:index)
 end
+
+get('/brand') do
+  erb(:brand)
+end
+
+get('/store') do
+  erb(:store)
+end
