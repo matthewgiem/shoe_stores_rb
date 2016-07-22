@@ -2,10 +2,10 @@ require('spec_helper')
 
 describe(Brand) do
   describe("#name") do
-    it("returns the name of the brand") do
+    it("returns the name of the brand captolized") do
       test_brand = Brand.create({:name => "matthew"})
 
-      expect(test_brand.name()).to(eq("matthew"))
+      expect(test_brand.name()).to(eq("Matthew"))
     end
   end
 
