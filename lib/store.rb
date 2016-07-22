@@ -3,6 +3,8 @@ class Store < ActiveRecord::Base
 
   before_save(:cap_letter)
 
+  validates(:name, :presence => true)
+
   private
   define_method(:cap_letter) do
     self.name=(name().capitalize())
