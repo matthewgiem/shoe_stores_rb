@@ -11,50 +11,55 @@ get('/') do
   erb(:index)
 end
 
-get('/brand') do
+get('/brands/new') do
   @brands = Brand.all()
-  erb(:brand)
+  erb(:brand_form)
 end
 
-get('/store') do
+get('/stores') do
   @stores = Store.all()
-  erb(:store)
+  erb(:stores)
 end
 
-post('/brand/new') do
+get('/stores/new') do
+  @stores = Store.all()
+  erb(:store_form)
+end
+
+post('/brands/new') do
   name = params.fetch('name')
   Brand.create({:name => name})
-  redirect to('/brand')
+  redirect to('/brands/new')
 end
 
-post('/store/new') do
+post('/stores/new') do
   name = params.fetch('name')
   Store.create({:name => name})
-  redirect to('/store')
+  redirect to('/stores/new')
 end
 
-get('/store/:id') do
+get('/stores/:id/edit') do
   id = params.fetch('id').to_i()
   @store = Store.find(id)
   erb(:store_update)
 end
 
-patch('/store/:id') do
+patch('/stores/:id') do
   id = params.fetch('id').to_i()
   name = params.fetch('name')
   store = Store.find(id)
   store.update({:name => name})
-  redirect to("/store/#{id}")
+  redirect to("/stores/#{id}")
 end
 
-delete('/store/:id') do
+delete('/stores/:id') do
   id = params.fetch('id').to_i()
   store = Store.find(id)
   store.delete()
-  redirect to("/store")
+  redirect to("/stores/new")
 end
 
-get('/brands/:id') do
+get('/brands/:id/edit') do
   id = params.fetch('id').to_i()
   @brand = Brand.find(id)
   @stores = Store.all()
@@ -66,5 +71,5 @@ post('/brands/:id') do
   brand = Brand.find(id)
   store_ids = params['store_ids']
   brand_stores = brand.update({:store_ids => store_ids})
-  redirect to("brands/#{id}")
+  redirect to("brands/#{id}/edit")
 end
