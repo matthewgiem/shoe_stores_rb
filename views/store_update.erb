@@ -19,4 +19,25 @@
   <p>There are no brands added yet</p>
 <% end %>
 
+<h2>update what brands are sold here</h2>
+
+<form action="/stores/<%= @store.id() %>" method="post">
+  <div class="checkbox">
+    <% if @brands.any?() %>
+      <% @brands.each() do |brand| %>
+
+        <label name="brand_ids">
+          <input type="checkbox" name="brand_ids[]" value="<%= brand.id() %>">
+          <%= brand.name() %>
+        </label>
+      <% end %>
+
+    <% else %>
+
+      <p>There are no brands yet!</p>
+    <% end %>
+  </div>
+  <button type="submit" name="button">Sold here</button>
+</form>
+
 <a href="/">home</a>

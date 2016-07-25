@@ -41,6 +41,7 @@ end
 get('/stores/:id/edit') do
   id = params.fetch('id').to_i()
   @store = Store.find(id)
+  @brands = Brand.all()
   erb(:store_update)
 end
 
@@ -72,4 +73,12 @@ post('/brands/:id') do
   store_ids = params['store_ids']
   brand_stores = brand.update({:store_ids => store_ids})
   redirect to("brands/#{id}/edit")
+end
+
+post('/stores/:id') do
+  id = params.fetch('id').to_i()
+  store = Store.find(id)
+  brand_ids = params['brand_ids']
+  store_brands = store.update({:brand_ids => brand_ids})
+  redirect to("stores/#{id}/edit")
 end
